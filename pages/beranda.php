@@ -12,7 +12,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
-        <h4> Silahkan Pilih Menu Disamping Untuk Mengolah Data.</h4>
+        <h4> Workshop Admin App.</h4>
     </section>
     <!-- /.Main content -->
 </div>
