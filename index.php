@@ -111,9 +111,10 @@ include "conf/connection.php";
             <ul class="sidebar-menu">
                 <li class="header">MENU</li>
                 <li class="treeview">
-                <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> <span>Beranda</span></a></li>
+                <li <?php if (!isset($_GET['page']) == 1) echo "class='active'"; ?>><a href="index.php"><i
+                                class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a></li>
                 </li>
-                <li class="treeview">
+                <li class="treeview <?php if(strpos($_GET['page'], 'master') !== false) echo "active";?>">
                     <a href="#">
                         <i class="glyphicon glyphicon-briefcase"></i> <span>Master</span>
                         <span class="pull-right-container">
@@ -121,7 +122,7 @@ include "conf/connection.php";
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.php?page=master_workshop"><i class="glyphicon glyphicon-education"></i>
+                        <li <?php if(isset($_GET['page']) && $_GET['page'] == "master_workshop") echo "class='active'";?>><a href="index.php?page=master_workshop"><i class="glyphicon glyphicon-education"></i>
                                 <span>Master Workshop</span></a></li>
                     </ul>
                 </li>
