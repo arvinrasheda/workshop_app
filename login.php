@@ -1,14 +1,15 @@
 <?php
 
 require_once("./conf/connection.php");
-
+$error = '';
 if(isset($_POST)){
 
+    // ambil parameter username dan password dari $_POST
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-//    $sql = "SELECT * FROM users WHERE username=:username OR email=:email";
-    $sql = "SELECT * FROM users WHERE username=:username";
+    $sql = /** @lang sql */
+        'SELECT * FROM users WHERE username=:username';
     if (isset($db)) {
         $conn = $db->prepare($sql);
     }
@@ -16,7 +17,6 @@ if(isset($_POST)){
     // bind parameter ke query
     $params = array(
         ":username" => $username,
-//        ":email" => $username
     );
 
     try {
@@ -24,19 +24,26 @@ if(isset($_POST)){
 
         $user = $conn->fetch(PDO::FETCH_ASSOC);
 
-        // jika user terdaftar
+        // jika user terdaftar / ditemukan
         if($user){
             // verifikasi password
             if(password_verify($password, $user["password"])){
                 // buat Session
                 session_start();
+                //store session array object ke "user"
                 $_SESSION["user"] = $user;
                 // login sukses, alihkan ke halaman dashboard
                 header("Location: ./index.php");
+            } else {
+                $error = ' Password Salah !';
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') { // jika http method post dan $user == false berarti username salah karena tidak ditemukan
+                $error = ' Username Salah !';
             }
         }
-    } catch (\mysql_xdevapi\Exception $e) {
-        var_dump($e->getMessage());die;
+    } catch (\Exception $e) {
+        header("Location: ./login.php");
     }
 }
 ?>
@@ -74,6 +81,14 @@ if(isset($_POST)){
 
     <div class="register-box-body">
         <p class="login-box-msg">Please Enter Username And Password!</p>
+
+        <?php if ($error) { ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                <li><?= $error ?></li>
+            </div>
+        <?php } ?>
 
         <form action="" method="post">
             <div class="form-group has-feedback">

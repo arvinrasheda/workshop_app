@@ -125,8 +125,8 @@ require_once("auth.php");
                 </li>
                 <li class="header">SETTING</li>
                 <li class="treeview">
-                <li><a href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
-                        <span>Link Register</span></a></li>
+                <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
+                        <span>Link Register Peserta</span></a></li>
                 <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=users"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
                 </li>
             </ul>
@@ -135,7 +135,7 @@ require_once("auth.php");
     </aside>
 
     <!-- Content -->
-    <?php include "conf/page.php"; ?>
+    <?php include "conf/route.php"; ?>
     <!-- /Content -->
 
     <footer class="main-footer">
