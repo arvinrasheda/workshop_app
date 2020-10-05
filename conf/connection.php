@@ -1,7 +1,13 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$database_name = "workshop";
-mysqli_connect($host ,$user, $password, $database_name) or die('Connection to Database Failed !');
+$db_host = 'localhost';
+$db_user = 'root';
+$db_pass = '';
+$db_name = "workshop";
+
+try {
+    $mysqli = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+    $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
 ?>

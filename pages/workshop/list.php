@@ -3,11 +3,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Master Workshop
+      Master Users
     </h1>
     <ol class="breadcrumb">
       <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Master Workshop</li>
+      <li class="active">Master Users</li>
     </ol>
   </section>
 
@@ -18,7 +18,7 @@
       <div class="col-xs-12">
         <div class="box box-primary">
           <div class="box-header">
-            <a href="index.php?page=tambah_mahasiswa" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
+            <a href="index.php?page=tambah_users" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
                 class="glyphicon glyphicon-plus"></i> Tambah</a>
           </div>
           <div class="box-body table-responsive">
@@ -27,6 +27,7 @@
                 <tr>
                   <th>#</th>
                   <th>Nama</th>
+                  <th>Username</th>
                   <th>Aksi</th>
                 </tr>
               </thead>

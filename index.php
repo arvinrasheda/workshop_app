@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "conf/connection.php";
+require_once("auth.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,7 @@ include "conf/connection.php";
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- jQuery 2.2.3 -->
-    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,7 +63,7 @@ include "conf/connection.php";
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Nama User</span>
+                            <span class="hidden-xs"><?= $_SESSION['user']['name'] ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -70,7 +71,7 @@ include "conf/connection.php";
                                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Nama User
+                                    <?= $_SESSION['user']['name'] ?>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -79,7 +80,7 @@ include "conf/connection.php";
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -99,7 +100,7 @@ include "conf/connection.php";
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Nama User</p>
+                    <p><?= $_SESSION['user']['name'] ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -126,7 +127,7 @@ include "conf/connection.php";
                 <li class="treeview">
                 <li><a href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
                         <span>Link Register</span></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> <span>Pengaturan</span></a></li>
+                <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=master_workshop"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
                 </li>
             </ul>
         </section>

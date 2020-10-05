@@ -6,9 +6,9 @@ switch ($page) {
   case 'master_workshop':
     include 'pages/workshop/list.php';
     break;
-//   case 'register':
-//     include 'pages/register.php';
-//     break;
+   case 'users':
+     include 'pages/users/list.php';
+     break;
   }
 }else{
     include "pages/beranda.php";
