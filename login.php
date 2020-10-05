@@ -9,20 +9,12 @@ if(isset($_POST)){
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
     $sql = /** @lang sql */
-        'SELECT * FROM users WHERE username=:username';
-    if (isset($db)) {
-        $conn = $db->prepare($sql);
-    }
-
-    // bind parameter ke query
-    $params = array(
-        ":username" => $username,
-    );
-
+        "SELECT * FROM users WHERE username='$username'";
     try {
-        $conn->execute($params);
-
-        $user = $conn->fetch(PDO::FETCH_ASSOC);
+        if (isset($db)) {
+            $query = mysqli_query($db, $sql);
+        }
+        $user = mysqli_fetch_assoc($query);
 
         // jika user terdaftar / ditemukan
         if($user){

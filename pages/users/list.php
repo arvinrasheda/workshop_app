@@ -3,8 +3,8 @@
 include_once("conf/connection.php");
 require_once("auth.php");
 // Fetch all users data from database
-if (isset($mysqli)) {
-    $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
+if (isset($db)) {
+    $result = mysqli_query($db, "SELECT * FROM users ORDER BY id DESC");
 }
 ?>
 <!-- Content Wrapper. Contains page content -->

@@ -1,3 +1,29 @@
+<?php
+require_once("./conf/connection.php");
+require_once("auth.php");
+
+if(isset($_POST)){
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    // enkripsi password
+    $password = password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
+
+    $sql = /** @lang sql */
+        "INSERT INTO users (name, username, password) VALUE ('$name', '$username', '$password')";
+
+    if (isset($db)) {
+        $query = mysqli_query($db, $sql);
+    }
+    if ($query) {
+        echo "<script>
+         window.location.href='index.php?page=users';
+         </script>";
+    } else {
+        var_dump($query->error);die;
+    }
+
+}
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,8 +44,9 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <!-- /.box-header -->
+
                     <!-- form start -->
-                    <form role="form" method="post" action="pages/mahasiswa/tambah_mahasiswa_proses.php">
+                    <form role="form" method="post" action="">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama</label>
