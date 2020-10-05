@@ -127,7 +127,7 @@ require_once("auth.php");
                 <li class="treeview">
                 <li><a href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
                         <span>Link Register</span></a></li>
-                <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=master_workshop"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
+                <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=users"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
                 </li>
             </ul>
         </section>

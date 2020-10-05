@@ -9,6 +9,9 @@ switch ($page) {
    case 'users':
      include 'pages/users/list.php';
      break;
+   case 'users-create':
+     include 'pages/users/create.php';
+     break;
   }
 }else{
     include "pages/beranda.php";

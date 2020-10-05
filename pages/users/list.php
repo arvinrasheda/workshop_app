@@ -27,7 +27,7 @@ if (isset($mysqli)) {
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <a href="index.php?page=tambah_mahasiswa" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
+                        <a href="index.php?page=users-create" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
                                 class="glyphicon glyphicon-plus"></i> Tambah</a>
                     </div>
                     <div class="box-body">
