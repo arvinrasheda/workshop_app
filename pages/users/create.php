@@ -1,8 +1,7 @@
 <?php
-require_once("./conf/connection.php");
+include_once("conf/connection.php");
 require_once("auth.php");
-
-if(isset($_POST)){
+if(isset($_POST['users'])){
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     // enkripsi password
@@ -32,7 +31,7 @@ if(isset($_POST)){
             Tambah User
         </h1>
         <ol class="breadcrumb">
-            <li><a href="index.php"><i class="fa fa-dashboard"></i> HOME</a></li>
+            <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Tambah User</li>
         </ol>
     </section>
@@ -63,7 +62,7 @@ if(isset($_POST)){
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <button type="submit" name="users" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
                         </div>
                     </form>
                 </div>
