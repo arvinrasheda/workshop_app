@@ -51,8 +51,8 @@ if (isset($db)) {
                                         <td><?php echo $row['name'];?></td>
                                         <td><?php echo $row['username'];?></td>
                                         <td>
-                                            <a href="index.php?page=ubah_mahasiswa&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
-                                            <a href="pages/mahasiswa/hapus_mahasiswa.php?id=<?=$row['id'];?>" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a href="index.php?page=users-edit&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
+                                            <a href="pages/users/hapus.php?id=<?=$row['id'];?>" onclick="return confirm('Anda yakin akan menghapus data ' + '<?=$row['name'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
                                         </td>
                                     </tr>
 

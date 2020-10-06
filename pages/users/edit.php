@@ -1,15 +1,35 @@
 <?php
+
+//session_start();
 include_once("conf/connection.php");
 require_once("auth.php");
 
-if(isset($_POST['users'])){
+$data = [];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = /** @lang sql */
+        "SELECT * FROM users WHERE id = '$id'";
+
+    if (isset($db)) {
+        $query = mysqli_query($db, $sql);
+        $data = mysqli_fetch_array($query);
+        if (!$data) {
+            echo "<script>
+            window.location.href='index.php?page=users';
+            alert('Data Tidak Ditemukan');
+            </script>";
+        }
+    }
+}
+
+
+if (isset($_POST['users'])) {
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-    // enkripsi password
-    $password = password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
 
     $sql = /** @lang sql */
-        "INSERT INTO users (name, username, password) VALUE ('$name', '$username', '$password')";
+        "UPDATE users SET username='$username', name='$name' WHERE id='$id'";
 
     if (isset($db)) {
         $query = mysqli_query($db, $sql);
@@ -17,10 +37,11 @@ if(isset($_POST['users'])){
     if ($query) {
         echo "<script>
          window.location.href='index.php?page=users';
-         alert('Data Berhasil Dibuat!');
+         alert('Data Berhasil diupdate!');
          </script>";
     } else {
-        var_dump($query->error);die;
+        var_dump($query->error);
+        die;
     }
 
 }
@@ -51,20 +72,21 @@ if(isset($_POST['users'])){
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input type="text" name="name" class="form-control" placeholder="Nama" required>
+                                <input type="text" name="name" class="form-control" placeholder="Nama"
+                                       value="<?= $data['name'] ?>" required>
                             </div>
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="User Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                <input type="text" name="username" class="form-control" placeholder="User Name"
+                                       value="<?= $data['username'] ?>" required>
                             </div>
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" name="users" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                            <button type="submit" name="users" class="btn btn-primary" title="Simpan Data"><i
+                                        class="glyphicon glyphicon-floppy-disk"></i> Simpan
+                            </button>
                         </div>
                     </form>
                 </div>
