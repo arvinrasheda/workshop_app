@@ -21,30 +21,6 @@ if (isset($_GET['id'])) {
         }
     }
 }
-
-
-if (isset($_POST['users'])) {
-    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-
-    $sql = /** @lang sql */
-        "UPDATE users SET username='$username', name='$name' WHERE id='$id'";
-
-    if (isset($db)) {
-        $query = mysqli_query($db, $sql);
-    }
-    if ($query) {
-        echo "<script>
-         window.location.href='index.php?page=users';
-         alert('Data Berhasil diupdate!');
-         </script>";
-    } else {
-        var_dump($query->error);
-        die;
-    }
-
-}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -68,7 +44,7 @@ if (isset($_POST['users'])) {
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    <form role="form" method="post" action="">
+                    <form role="form" method="post" action="pages/users/store.php">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama</label>
@@ -84,6 +60,7 @@ if (isset($_POST['users'])) {
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+                            <input type="hidden" name="type" value="update">
                             <button type="submit" name="users" class="btn btn-primary" title="Simpan Data"><i
                                         class="glyphicon glyphicon-floppy-disk"></i> Simpan
                             </button>

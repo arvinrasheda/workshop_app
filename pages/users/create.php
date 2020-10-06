@@ -1,7 +1,6 @@
 <?php
 include_once("conf/connection.php");
 require_once("auth.php");
-
 if(isset($_POST['users'])){
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
@@ -15,9 +14,13 @@ if(isset($_POST['users'])){
         $query = mysqli_query($db, $sql);
     }
     if ($query) {
+        $_SESSION['toastr'] = array(
+            'type' => 'success', // or 'success' or 'info' or 'warning'
+            'message' => 'Data berhasil ditambah!',
+            'title' => 'Sukses'
+        );
         echo "<script>
          window.location.href='index.php?page=users';
-         alert('Data Berhasil Dibuat!');
          </script>";
     } else {
         var_dump($query->error);die;
@@ -47,7 +50,7 @@ if(isset($_POST['users'])){
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    <form role="form" method="post" action="">
+                    <form role="form" method="post" action="pages/users/store.php">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama</label>
@@ -64,6 +67,7 @@ if(isset($_POST['users'])){
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
+                            <input type="hidden" name="type" value="create">
                             <button type="submit" name="users" class="btn btn-primary" title="Simpan Data"> <i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
                         </div>
                     </form>
