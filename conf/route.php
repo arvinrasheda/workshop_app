@@ -8,9 +8,6 @@ if (isset($_GET['id'])) {
 if (isset($_GET['page'])) {
     $page = $_GET['page']; // init variable $page jika ada
     switch ($page) {
-        case 'master_workshop':
-            include 'pages/workshop/list.php';
-            break;
         case 'users':
             include 'pages/users/list.php';
             break;
@@ -19,6 +16,15 @@ if (isset($_GET['page'])) {
             break;
         case 'users-edit':
             include 'pages/users/edit.php';
+            break;
+        case 'workshop':
+            include 'pages/workshop/list.php';
+            break;
+        case 'workshop-create':
+            include 'pages/workshop/create.php';
+            break;
+        case 'workshop-edit':
+            include 'pages/workshop/edit.php';
             break;
     }
 } else { // jika tidak ada param page

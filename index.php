@@ -32,6 +32,12 @@ require_once("auth.php");
     <!-- jQuery 2.2.3 -->
     <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 
+    <style>
+        table.dataTable td.dataTables_empty{
+            text-align:center;
+        }
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -121,7 +127,7 @@ require_once("auth.php");
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li <?php if(isset($_GET['page']) && $_GET['page'] == "master_workshop") echo "class='active'";?>><a href="index.php?page=master_workshop"><i class="glyphicon glyphicon-education"></i>
+                        <li <?php if(isset($_GET['page']) && $_GET['page'] == "workshop") echo "class='active'";?>><a href="index.php?page=workshop"><i class="glyphicon glyphicon-education"></i>
                                 <span>Master Workshop</span></a></li>
                     </ul>
                 </li>
@@ -183,6 +189,22 @@ require_once("auth.php");
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    function refreshNumberFormat() {
+        $('.number-format').on('keypress', function(e){
+            return (e.charCode >= 48 && e.charCode <= 57);
+        }).on('keyup', function(){
+            var n = parseInt($(this).val().replace(/\D/g,''));
+            $(this).val($(this).val() == '' ? '' : n.toLocaleString('ID'));
+        });
+    }
+    $(document).ready(function($){
+
+        // Format mata uang.
+        refreshNumberFormat();
+
+    })
+</script>
 </body>
 
 </html>
