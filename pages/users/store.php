@@ -26,11 +26,17 @@ if (isset($_POST['users'])) {
                     'title' => 'Sukses'
                 );
                 echo "<script>
-                 window.location.href='../../index.php?page=users';
-                 </script>";
+                window.location.href='../../index.php?page=users';
+                </script>";
             } else {
-                var_dump($query->error);
-                die;
+                $_SESSION['toastr'] = array(
+                    'type' => 'warning', // or 'success' or 'info' or 'warning'
+                    'message' => 'Error: ' . $db->error,
+                    'title' => 'Peringatan'
+                );
+                echo "<script>
+                window.location.href='../../index.php?page=workshop';
+                </script>";
             }
             break;
         case 'update':
@@ -51,11 +57,17 @@ if (isset($_POST['users'])) {
                     'title' => 'Sukses'
                 );
                 echo "<script>
-         window.location.href='../../index.php?page=users';
-         </script>";
+                window.location.href='../../index.php?page=users';
+                </script>";
             } else {
-                var_dump($query->error);
-                die;
+                $_SESSION['toastr'] = array(
+                    'type' => 'warning', // or 'success' or 'info' or 'warning'
+                    'message' => 'Error: ' . $db->error,
+                    'title' => 'Peringatan'
+                );
+                echo "<script>
+                window.location.href='../../index.php?page=workshop';
+                </script>";
             }
             break;
     }

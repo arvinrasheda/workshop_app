@@ -7,15 +7,22 @@ require_once("auth.php");
 $data = [];
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = /** @lang sql */
+    $sqlPelatihan = /** @lang sql */
         "SELECT * FROM pelatihan WHERE id = '$id'";
 
+    $sqlMateri = /** @lang sql */
+        "SELECT * FROM materi WHERE pelatihan_id = '$id'";
+
     if (isset($db)) {
-        $query = mysqli_query($db, $sql);
-        $data = mysqli_fetch_array($query);
-        if (!$data) {
+        $queryPelatihan = mysqli_query($db, $sqlPelatihan);
+        $dataPelatihan = mysqli_fetch_array($queryPelatihan);
+
+        $queryMateri = mysqli_query($db, $sqlMateri);
+        $dataMateri = mysqli_fetch_array($queryMateri);
+
+        if (!$dataPelatihan) {
             echo "<script>
-            window.location.href='index.php?page=users';
+            window.location.href='index.php?page=workshop';
             alert('Data Tidak Ditemukan');
             </script>";
         }
@@ -27,11 +34,11 @@ if (isset($_GET['id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tambah Workshop
+            Edit Workshop
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Tambah Workshop</li>
+            <li class="active">Edit Workshop</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -49,12 +56,58 @@ if (isset($_GET['id'])) {
                             <div class="form-group">
                                 <label>Nama</label>
                                 <input type="text" name="name" class="form-control" placeholder="Nama"
-                                       value="<?= $data['name'] ?>" required>
+                                       value="<?= $dataPelatihan['name'] ?>" required>
                             </div>
                             <div class="form-group">
                                 <label>Harga</label>
                                 <input type="text" name="harga" class="form-control number-format" placeholder="Harga"
-                                       value="<?= $data['harga'] ?>" required>
+                                       value="<?= $dataPelatihan['harga'] ?>" required>
+                            </div>
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3 class="box-title">List Materi</h3>
+                                    <a href="index.php?page=materi-create&pelatihan_id=<?= $dataPelatihan['id'] ?>" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
+                                                class="glyphicon glyphicon-plus"></i> Tambah</a>
+                                </div>
+                                <div class="box-body">
+                                    <table id="workshop" class="table table-bordered table-hover table-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th width="10%">#</th>
+                                            <th>Nama</th>
+                                            <th>Jenis</th>
+                                            <th>Link</th>
+                                            <th width="10%">Aksi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $no=0;
+                                        if ($dataMateri) while($row = mysqli_fetch_array($dataMateri)) {
+                                            ?>
+                                            <tr>
+                                                <td><?= $no=$no+1;?></td>
+                                                <td><?= $row['nama'];?></td>
+                                                <td><?= $row['jenis'];?></td>
+                                                <td><a href="<?= $row['link'];?>" class="btn btn-primary">Download</a></td>
+                                                <td>
+                                                    <a href="index.php?page=materi-edit&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
+                                                    <a href="pages/materi/hapus.php?id=<?=$row['id'];?>" onclick="return confirm('Anda yakin akan menghapus data ' + '<?=$row['nama'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </td>
+                                            </tr>
+
+                                        <?php } else {
+                                            ?>
+                                            <tr>
+                                                <td colspan="5" align="center">Data Tidak Ditemukan</td>
+                                            </tr>
+                                            <?php
+                                        }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
                             </div>
                         </div>
                         <!-- /.box-body -->

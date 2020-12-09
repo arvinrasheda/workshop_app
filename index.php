@@ -131,10 +131,22 @@ require_once("auth.php");
                                 <span>Master Workshop</span></a></li>
                     </ul>
                 </li>
+                <li class="treeview <?php if(strpos($_GET['page'], 'peserta') !== false) echo "active";?>">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-user"></i> <span>Peserta</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li  <?php if(isset($_GET['page']) && $_GET['page'] == "peserta") echo "class='active'";?>><a href="index.php?page=peserta"><i class="glyphicon glyphicon-user"></i> <span>Daftar Peserta</span></a></li>
+                        </li>
+                        <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
+                                <span>Link Register Peserta</span></a></li>
+                    </ul>
+                </li>
                 <li class="header">SETTING</li>
                 <li class="treeview">
-                <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
-                        <span>Link Register Peserta</span></a></li>
                 <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=users"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
                 </li>
             </ul>

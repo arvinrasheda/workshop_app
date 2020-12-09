@@ -16,17 +16,23 @@ if (isset($_POST['pelatihan'])) {
                 "INSERT INTO pelatihan (name, harga) VALUE ('$name', '$harga')";
 
             if (isset($db)) {
+
+                /*
+                 * untuk transaction
+                 * $db->autocommit(false);*/
                 $query = mysqli_query($db, $sql);
             }
             if ($query) {
+//                $db->commit();
+//                var_export($query);die;
                 $_SESSION['toastr'] = array(
                     'type' => 'success', // or 'success' or 'info' or 'warning'
                     'message' => 'Data berhasil ditambah!',
                     'title' => 'Sukses'
                 );
                 echo "<script>
-                 window.location.href='../../index.php?page=workshop';
-                 </script>";
+                window.location.href='../../index.php?page=workshop';
+                </script>";
             } else {
                 $_SESSION['toastr'] = array(
                     'type' => 'warning', // or 'success' or 'info' or 'warning'
@@ -34,8 +40,8 @@ if (isset($_POST['pelatihan'])) {
                     'title' => 'Peringatan'
                 );
                 echo "<script>
-                 window.location.href='../../index.php?page=workshop';
-                 </script>";
+                window.location.href='../../index.php?page=workshop';
+                </script>";
             }
             break;
         case 'update':

@@ -33,11 +33,11 @@ if(isset($_POST['users'])){
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tambah Workshop
+            Tambah Materi
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Tambah Workshop</li>
+            <li class="active">Tambah Materi</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -54,11 +54,27 @@ if(isset($_POST['users'])){
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input type="text" name="name" class="form-control" placeholder="Nama" required>
+                                <input type="text" name="nama" class="form-control" placeholder="Nama" required>
                             </div>
                             <div class="form-group">
-                                <label>Harga</label>
-                                <input type="text" name="harga" class="form-control number-format" placeholder="Harga" required>
+                                <label>Jenis</label>
+                                <select id="jenis" name="jenis" class="form-control" onchange="checkJenis();">
+                                    <option selected disabled> - Pilih Jenis - </option>
+                                    <option value="DOKUMEN">File Dokumen Materi</option>
+                                    <option value="DARING">Daring Online Link</option>
+                                </select>
+                            </div>
+                            <div id="daring" class="form-group hidden">
+                                <label>Link</label>
+                                <input type="text" name="link" class="form-control" placeholder="link">
+                            </div>
+                            <div id="dokumen" class="form-group hidden">
+                                <label>File</label>
+                                <input type="file" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <textarea placeholder="Deskripsi Materi" name="description" class="form-control"></textarea>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -74,3 +90,16 @@ if(isset($_POST['users'])){
     </section>
     <!-- /.content -->
 </div>
+
+<script type="text/javascript">
+    function checkJenis() {
+        var jenis = $("#jenis").val();
+        if (jenis == "DOKUMEN") {
+            $("#dokumen").removeClass("hidden")
+            $("#daring").addClass("hidden")
+        } else {
+            $("#daring").removeClass("hidden")
+            $("#dokumen").addClass("hidden")
+        }
+    }
+</script>

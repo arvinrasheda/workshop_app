@@ -9,11 +9,13 @@ if (isset($_POST['pelatihan'])) {
     switch ($type) {
         case 'create':
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-            $harga = filter_input(INPUT_POST, 'harga', FILTER_SANITIZE_STRING);
-            $harga = preg_replace('/\./', '', $harga);
+            $jenis = filter_input(INPUT_POST, 'jenis', FILTER_SANITIZE_STRING);
+            $link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_STRING);
+            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+            $pelatihan_id = filter_input(INPUT_POST, 'pelatihan_id', FILTER_SANITIZE_STRING);
 
             $sql = /** @lang sql */
-                "INSERT INTO pelatihan (name, harga) VALUE ('$name', '$harga')";
+                "INSERT INTO materi (nama, jenis, link, description, pelatihan_id) VALUE ('$name', '$jenis', '$link', '$description', '$pelatihan_id')";
 
             if (isset($db)) {
                 $query = mysqli_query($db, $sql);
@@ -25,7 +27,7 @@ if (isset($_POST['pelatihan'])) {
                     'title' => 'Sukses'
                 );
                 echo "<script>
-                 window.location.href='../../index.php?page=workshop';
+                 window.location.href='../../index.php?page=materi';
                  </script>";
             } else {
                 $_SESSION['toastr'] = array(
@@ -34,18 +36,20 @@ if (isset($_POST['pelatihan'])) {
                     'title' => 'Peringatan'
                 );
                 echo "<script>
-                 window.location.href='../../index.php?page=workshop';
+                 window.location.href='../../index.php?page=materi';
                  </script>";
             }
             break;
         case 'update':
             $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-            $harga = filter_input(INPUT_POST, 'harga', FILTER_SANITIZE_STRING);
-            $harga = preg_replace('/\./', '', $harga);
+            $jenis = filter_input(INPUT_POST, 'jenis', FILTER_SANITIZE_STRING);
+            $link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_STRING);
+            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+            $pelatihan_id = filter_input(INPUT_POST, 'pelatihan_id', FILTER_SANITIZE_STRING);
 
             $sql = /** @lang sql */
-                "UPDATE pelatihan SET harga='$harga', name='$name' WHERE id='$id'";
+                "UPDATE pelatihan SET jenis='$jenis', nama='$name', link='$link$', description='$description$', pelatihan_id='$pelatihan_id' WHERE id='$id'";
 
             if (isset($db)) {
                 $query = mysqli_query($db, $sql);
@@ -57,7 +61,7 @@ if (isset($_POST['pelatihan'])) {
                     'title' => 'Sukses'
                 );
                 echo "<script>
-                window.location.href='../../index.php?page=workshop';
+                window.location.href='../../index.php?page=materi';
                 </script>";
             } else {
                 $_SESSION['toastr'] = array(
@@ -66,7 +70,7 @@ if (isset($_POST['pelatihan'])) {
                     'title' => 'Peringatan'
                 );
                 echo "<script>
-                window.location.href='../../index.php?page=workshop';
+                window.location.href='../../index.php?page=materi';
                 </script>";
             }
             break;
