@@ -1,7 +1,12 @@
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <?php require_once("auth.php"); ?>
+    <?php require_once("auth.php");
+    /*
+     *  cara pakai class
+    */
+    include 'helper/GeneralHelper.php';
+    $helper = new GeneralHelper();
+    ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
