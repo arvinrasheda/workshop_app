@@ -20,9 +20,11 @@ if(isset($_POST)){
         if($user){
             // verifikasi password
             if(password_verify($password, $user["password"])){
-                // buat Session
+                /*
+                 * buat Session
+                 * */
                 session_start();
-                //store session array object ke "user"
+                //store session array object data user ke key "user" di session
                 $_SESSION["user"] = $user;
                 // login sukses, alihkan ke halaman dashboard
                 header("Location: ./index.php");
@@ -30,7 +32,10 @@ if(isset($_POST)){
                 $error = ' Password Salah !';
             }
         } else {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') { // jika http method post dan $user == false berarti username salah karena tidak ditemukan
+            /*
+             * jika http method post dan $user == false berarti username salah karena tidak ditemukan
+             */
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = ' Username Salah !';
             }
         }
