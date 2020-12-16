@@ -9,9 +9,9 @@ $id = $_GET['id'];
 
 // Delete user row from table based on given id
 if (isset($db)) {
-    $check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM pelatihan WHERE id = '$id'"));
+    $check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM materi WHERE id = '$id'"));
     if ($check) {
-        $result = mysqli_query($db, "DELETE FROM pelatihan WHERE id='$id'");
+        $result = mysqli_query($db, "DELETE FROM materi WHERE id='$id'");
         $_SESSION['toastr'] = array(
             'type' => 'success', // or 'success' or 'info' or 'warning'
             'message' => 'Data berhasil dihapus!',

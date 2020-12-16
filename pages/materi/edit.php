@@ -8,7 +8,7 @@ $data = [];
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = /** @lang sql */
-        "SELECT * FROM pelatihan WHERE id = '$id'";
+        "SELECT * FROM materi WHERE id = '$id'";
 
     if (isset($db)) {
         $query = mysqli_query($db, $sql);
@@ -27,11 +27,11 @@ if (isset($_GET['id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tambah Workshop
+            Edit Materi
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Tambah Workshop</li>
+            <li class="active">Edit Materi</li>
         </ol>
     </section>
     <!-- Main content -->

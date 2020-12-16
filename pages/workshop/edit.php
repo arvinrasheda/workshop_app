@@ -17,8 +17,7 @@ if (isset($_GET['id'])) {
         $queryPelatihan = mysqli_query($db, $sqlPelatihan);
         $dataPelatihan = mysqli_fetch_array($queryPelatihan);
 
-        $queryMateri = mysqli_query($db, $sqlMateri);
-        $dataMateri = mysqli_fetch_array($queryMateri);
+        $dataMateri = mysqli_query($db, $sqlMateri);
 
         if (!$dataPelatihan) {
             echo "<script>
@@ -82,6 +81,7 @@ if (isset($_GET['id'])) {
                                         </thead>
                                         <tbody>
                                         <?php
+//                                        var_export($dataMateri);die;
                                         $no=0;
                                         if ($dataMateri) while($row = mysqli_fetch_array($dataMateri)) {
                                             ?>
