@@ -89,7 +89,13 @@ if (isset($_GET['id'])) {
                                                 <td><?= $no=$no+1;?></td>
                                                 <td><?= $row['nama'];?></td>
                                                 <td><?= $row['jenis'];?></td>
-                                                <td><a href="<?= $row['link'];?>" class="btn btn-primary">Download</a></td>
+                                                <td>
+                                                    <?php if ($row['jenis'] == 'DOKUMEN') { ?>
+                                                        <a href="download.php?file=<?= $row['link'];?>" target="_blank" class="btn btn-primary"><i class="glyphicon glyphicon-download"> Download</i></a>
+                                                    <?php } else if ($row['jenis'] == 'DARING') { ?>
+                                                        <a href="<?= $row['link'];?>" target="_blank" class="btn btn-primary"> <i class="glyphicon glyphicon-fast-forward"> Menuju Link</i></a>
+                                                    <?php } ?>
+                                                </td>
                                                 <td>
                                                     <a href="index.php?page=materi-edit&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
                                                     <a href="pages/materi/hapus.php?id=<?=$row['id'];?>" onclick="return confirm('Anda yakin akan menghapus data ' + '<?=$row['nama'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
