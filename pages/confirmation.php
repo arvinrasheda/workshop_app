@@ -33,46 +33,26 @@ if (isset($db)) {
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="#"><b>Register </b>WSP</a>
+        <a href="#"><b>Confirm Order </b>WSP</a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Upload proof of payment</p>
 
-        <form action="/pages/proses_register.php" autocomplete="off" method="post">
+        <form action="tracking.php" autocomplete="off" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Full name" autocomplete="off">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Order ID" autocomplete="off">
+                <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Username" autocomplete="off">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email" autocomplete="off">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="No Hp" autocomplete="off">
-                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" autocomplete="off">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <select class="form-control" autocomplete="off">
-                    <option selected disabled> - Pilih Pelatihan -</option>
-                    <?php while ($row = mysqli_fetch_array($result)) { ?>
-                        <option value="<?= $row['id'] ?>"><?= $row['name']; ?></option>
-                    <?php } ?>
-                </select>
+                <input type="file" class="form-control" file placeholder="Order ID" autocomplete="off">
+                <span class="glyphicon glyphicon-file form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            Upload <a href="confirmation.php">Prof of payment</a>
+                            Check Status <a href="tracking.php">Here!</a>
                         </label>
                     </div>
                 </div>
