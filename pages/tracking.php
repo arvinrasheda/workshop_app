@@ -44,7 +44,7 @@ if (isset($db)) {
                 <input type="text" class="form-control" placeholder="Order ID" autocomplete="off">
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Check</button>
         </form>
 
     </div>
