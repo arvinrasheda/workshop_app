@@ -1,7 +1,28 @@
 <?php
 require_once("../conf/connection.php");
+include '../helper/GeneralHelper.php';
+$data = "";
 if (isset($db)) {
-    $result = mysqli_query($db, "SELECT * FROM pelatihan ORDER BY id DESC");
+    if (isset($_GET["id"])) {
+        $orderId =  $_GET['id'];
+        $result = mysqli_query($db, "
+            SELECT
+                p.id as peserta_id,
+                p.order_id,
+                u.name AS fullname,
+                e.name AS pelatihan,
+                e.harga,
+                p.email,
+                p.status 
+            FROM
+                peserta p
+                INNER JOIN users u ON p.user_id = u.id
+                INNER JOIN pelatihan e ON p.pelatihan_id = e.id 
+            WHERE order_id = '$orderId'
+        ");
+
+        $data = mysqli_fetch_array($result);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -9,7 +30,7 @@ if (isset($db)) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registration WSP</title>
+    <title>Tracking WSP</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -39,14 +60,68 @@ if (isset($db)) {
     <div class="register-box-body">
         <p class="login-box-msg">Track Status Your Order</p>
 
-        <form action="tracking.php" autocomplete="off" method="post">
+        <form action="tracking.php" autocomplete="off" method="get">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Order ID" autocomplete="off">
+                <input type="text" name="id" class="form-control" placeholder="Order ID" autocomplete="off">
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Check</button>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            Upload <a href="confirmation.php">Prof of payment</a>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Check</button>
+                </div>
+                <!-- /.col -->
+            </div>
         </form>
-
+        <?php if ($data != "") { ?>
+            <table id="layout-skins-list" class="table table-striped bring-up nth-2-center">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Invoice</td>
+                    <td><?= $data["order_id"] ?></td>
+                </tr>
+                <tr>
+                    <td>Peserta</td>
+                    <td><?= $data["fullname"] ?></td>
+                </tr>
+                <tr>
+                    <td>Pelatihan</td>
+                    <td><?= $data["pelatihan"] ?></td>
+                </tr>
+                <tr>
+                    <td>Jumlah Pembayaran</td>
+                    <td><?= "Rp " . number_format($data['harga'],2,',','.');?></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>
+                        <?php
+                        if ($data["status"] == GeneralHelper::ORDER_NEW) {
+                            echo '<small class="badge bg-green"> NEW</small>';
+                        } else if ($data["status"] == GeneralHelper::ORDER_ONPROGRESS) {
+                            echo '<small class="badge bg-warning"> ONPROGRESS</small>';
+                        } else {
+                            echo '<small class="badge bg-blue"> DONE</small>';
+                        }
+                        ?>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        <?php } ?>
     </div>
     <!-- /.form-box -->
 </div>
