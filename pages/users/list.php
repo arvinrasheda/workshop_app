@@ -37,6 +37,8 @@ if (isset($db)) {
                                 <th width="10%">#</th>
                                 <th>Nama</th>
                                 <th>Username</th>
+                                <th>Admin</th>
+                                <th>Active</th>
                                 <th width="10%">Aksi</th>
                             </tr>
                             </thead>
@@ -50,6 +52,24 @@ if (isset($db)) {
                                         <td><?php echo $no=$no+1;?></td>
                                         <td><?php echo $row['name'];?></td>
                                         <td><?php echo $row['username'];?></td>
+                                        <td>
+                                            <?php
+                                            if ($row["is_admin"] == 1) {
+                                                echo '<small class="badge bg-green"><i class="glyphicon glyphicon-check"></i></small>';
+                                            } else {
+                                                echo '<small class="badge bg-red"><i class="glyphicon glyphicon-remove"></i></small>';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row["is_active"] == 1) {
+                                                echo '<small class="badge bg-green"><i class="glyphicon glyphicon-check"></i></small>';
+                                            } else {
+                                                echo '<small class="badge bg-red"><i class="glyphicon glyphicon-remove"></i></small>';
+                                            }
+                                            ?>
+                                        </td>
                                         <td>
                                             <a href="index.php?page=users-edit&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
                                             <a href="pages/users/hapus.php?id=<?=$row['id'];?>" onclick="return confirm('Anda yakin akan menghapus data ' + '<?=$row['name'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
