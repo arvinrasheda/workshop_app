@@ -35,6 +35,15 @@ if (isset($_GET['page'])) {
         case 'materi-edit':
             include 'pages/materi/edit.php';
             break;
+        case 'peserta':
+            include 'pages/peserta/list.php';
+            break;
+        case 'peserta-create':
+            include 'pages/peserta/create.php';
+            break;
+        case 'peserta-edit':
+            include 'pages/peserta/edit.php';
+            break;
     }
 } else { // jika tidak ada param page
     include "pages/beranda.php";

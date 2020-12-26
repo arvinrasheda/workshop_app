@@ -3,6 +3,10 @@
 
 class GeneralHelper
 {
+    const ORDER_NEW = "NEW";
+    const ORDER_ONPROGRESS = "ONPROGRESS";
+    const ORDER_DONE = "DONE";
+
     public function random($lenght, $isOnlyNumber = false)
     {
         if ($isOnlyNumber) {

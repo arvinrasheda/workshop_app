@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 require_once("../conf/connection.php");
 if (isset($db)) {
     $result = mysqli_query($db, "SELECT * FROM pelatihan ORDER BY id DESC");
@@ -22,6 +24,8 @@ if (isset($db)) {
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,29 +43,29 @@ if (isset($db)) {
     <div class="register-box-body">
         <p class="login-box-msg">Register a new membership</p>
 
-        <form action="/pages/proses_register.php" autocomplete="off" method="post">
+        <form action="proses_register.php" autocomplete="off" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Full name" autocomplete="off">
+                <input type="text" name="name" class="form-control" placeholder="Full name" autocomplete="off" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Username" autocomplete="off">
+                <input type="text" name="username" class="form-control" placeholder="Username" autocomplete="off" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email" autocomplete="off">
+                <input type="email" name="email" class="form-control" placeholder="Email" autocomplete="off" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="No Hp" autocomplete="off">
+                <input type="text" name="nohp" class="form-control" placeholder="No Hp" autocomplete="off" required>
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" autocomplete="off">
+                <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <select class="form-control" autocomplete="off">
+                <select class="form-control" name="pelatihan_id" autocomplete="off" required>
                     <option selected disabled> - Pilih Pelatihan -</option>
                     <?php while ($row = mysqli_fetch_array($result)) { ?>
                         <option value="<?= $row['id'] ?>"><?= $row['name']; ?></option>
@@ -78,7 +82,7 @@ if (isset($db)) {
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" name="register"  class="btn btn-primary btn-block btn-flat">Register</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -102,7 +106,15 @@ if (isset($db)) {
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
+        <?php
+        if(isset($_SESSION['toastr']))
+        {
+            echo 'toastr.'.$_SESSION['toastr']['type'].'("'.$_SESSION['toastr']['message'].'", "'.$_SESSION['toastr']['title'].'")';
+            unset($_SESSION['toastr']);
+        }
+        ?>
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 </html>
