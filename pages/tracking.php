@@ -43,6 +43,8 @@ if (isset($db)) {
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,7 +64,7 @@ if (isset($db)) {
 
         <form action="tracking.php" autocomplete="off" method="get">
             <div class="form-group has-feedback">
-                <input type="text" name="id" class="form-control" placeholder="Order ID" autocomplete="off">
+                <input type="text" name="id" class="form-control" placeholder="Order ID / Invoice" autocomplete="off">
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <div class="row">
@@ -112,7 +114,7 @@ if (isset($db)) {
                         if ($data["status"] == GeneralHelper::ORDER_NEW) {
                             echo '<small class="badge bg-green"> NEW</small>';
                         } else if ($data["status"] == GeneralHelper::ORDER_ONPROGRESS) {
-                            echo '<small class="badge bg-warning"> ONPROGRESS</small>';
+                            echo '<small class="badge bg-yellow"> ONPROGRESS</small>';
                         } else {
                             echo '<small class="badge bg-blue"> DONE</small>';
                         }
@@ -133,6 +135,23 @@ if (isset($db)) {
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        <?php
+        if(isset($_SESSION['toastr']))
+        {
+            echo 'toastr.'.$_SESSION['toastr']['type'].'("'.$_SESSION['toastr']['message'].'", "'.$_SESSION['toastr']['title'].'")';
+            unset($_SESSION['toastr']);
+        }
+        ?>
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     $(function () {
         $('input').iCheck({

@@ -5,15 +5,15 @@ include_once("conf/connection.php");
 require_once("auth.php");
 
 $data = [];
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sqlPelatihan = /** @lang sql */
-        "SELECT * FROM pelatihan WHERE id = '$id'";
+if (isset($db)) {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sqlPelatihan = /** @lang sql */
+            "SELECT * FROM pelatihan WHERE id = '$id'";
 
-    $sqlMateri = /** @lang sql */
-        "SELECT * FROM materi WHERE pelatihan_id = '$id'";
+        $sqlMateri = /** @lang sql */
+            "SELECT * FROM materi WHERE pelatihan_id = '$id'";
 
-    if (isset($db)) {
         $queryPelatihan = mysqli_query($db, $sqlPelatihan);
         $dataPelatihan = mysqli_fetch_array($queryPelatihan);
 

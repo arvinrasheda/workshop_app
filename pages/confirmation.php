@@ -1,8 +1,6 @@
 <?php
-require_once("../conf/connection.php");
-if (isset($db)) {
-    $result = mysqli_query($db, "SELECT * FROM pelatihan ORDER BY id DESC");
-}
+
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +20,8 @@ if (isset($db)) {
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,13 +39,13 @@ if (isset($db)) {
     <div class="register-box-body">
         <p class="login-box-msg">Upload proof of payment</p>
 
-        <form action="tracking.php" autocomplete="off" method="post">
+        <form action="proses_confirmation.php" autocomplete="off" method="post" enctype="multipart/form-data">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Order ID" autocomplete="off">
+                <input type="text" class="form-control" placeholder="Order ID / Invoice" autocomplete="off" name="order_id" required>
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="file" class="form-control" file placeholder="Order ID" autocomplete="off">
+                <input type="file" class="form-control" name="file" autocomplete="off" required>
                 <span class="glyphicon glyphicon-file form-control-feedback"></span>
             </div>
             <div class="row">
@@ -58,7 +58,7 @@ if (isset($db)) {
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Upload</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -84,5 +84,22 @@ if (isset($db)) {
         });
     });
 </script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        <?php
+        if(isset($_SESSION['toastr']))
+        {
+            echo 'toastr.'.$_SESSION['toastr']['type'].'("'.$_SESSION['toastr']['message'].'", "'.$_SESSION['toastr']['title'].'")';
+            unset($_SESSION['toastr']);
+        }
+        ?>
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 </html>
