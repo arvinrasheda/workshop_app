@@ -26,8 +26,13 @@ if(isset($_POST)){
                 session_start();
                 //store session array object data user ke key "user" di session
                 $_SESSION["user"] = $user;
-                // login sukses, alihkan ke halaman dashboard
-                header("Location: ./index.php");
+
+                if ($user['is_active'] == 1) {
+                    // login sukses, alihkan ke halaman dashboard
+                    header("Location: ./index.php");
+                } else {
+                    $error = 'Maaf User yang terdaftar belum aktif!';
+                }
             } else {
                 $error = ' Password Salah !';
             }

@@ -81,8 +81,7 @@ if (isset($_GET['id'])) {
                             <input type="hidden" name="id" value="<?= $data['id'] ?>">
                             <input type="hidden" name="pelatihan_id" value="<?= $data['pelatihan_id'] ?>">
                             <input type="hidden" name="type" value="update">
-                            <button type="submit" name="materi" class="btn btn-primary" title="Simpan Data"><i
-                                        class="glyphicon glyphicon-floppy-disk"></i> Simpan
+                            <button type="submit" name="materi" class="btn btn-primary" title="Simpan Data"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan
                             </button>
                         </div>
                     </form>

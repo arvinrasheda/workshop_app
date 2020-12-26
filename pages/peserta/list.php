@@ -69,6 +69,8 @@ if (isset($db)) {
                                                     echo '<small class="badge bg-green"> NEW</small>';
                                                 } else if ($row["status"] == GeneralHelper::ORDER_ONPROGRESS) {
                                                     echo '<small class="badge bg-yellow"> ONPROGRESS</small>';
+                                                } else if ($row["status"] == GeneralHelper::ORDER_CANCEL) {
+                                                    echo '<small class="badge bg-red"> CANCEL</small>';
                                                 } else {
                                                     echo '<small class="badge bg-blue"> DONE</small>';
                                                 }
@@ -78,8 +80,10 @@ if (isset($db)) {
                                             <?php if ($row["filename"] != null) { ?>
                                                 <a href="file/proof/<?=$row['filename'];?>" class="btn btn-sm btn-primary" role="button" title="Lihat Bukti transfer"><i class="glyphicon glyphicon-download"></i></a>
                                             <?php } ?>
-                                            <a href="index.php?page=workshop-edit&id=<?=$row['peserta_id'];?>" class="btn btn-sm btn-success" role="button" title="Approve Data"><i class="glyphicon glyphicon-check"></i></a>
-                                            <a href="pages/workshop/hapus.php?id=<?=$row['peserta_id'];?>" onclick="return confirm('Anda yakin akan menolak peserta ' + '<?=$row['fullname'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Tolak Data"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                                            <?php if ($row["status"] == GeneralHelper::ORDER_NEW) { ?>
+                                            <a href="pages/peserta/store.php?id=<?=$row['peserta_id'];?>&status=accept" onclick="return confirm('Anda yakin akan approve peserta ' + '<?=$row['fullname'];?>' + ' ini ?');" class="btn btn-sm btn-success" role="button" title="Approve Data"><i class="glyphicon glyphicon-check"></i></a>
+                                            <a href="pages/peserta/store.php?id=<?=$row['peserta_id'];?>&status=cancel" onclick="return confirm('Anda yakin akan menolak peserta ' + '<?=$row['fullname'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Tolak Data"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
 

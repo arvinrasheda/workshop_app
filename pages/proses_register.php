@@ -43,9 +43,9 @@ if (isset($db)) {
             } else {
                 $db->rollback();
                 $_SESSION['toastr'] = array(
-                    'type' => 'warning', // or 'success' or 'info' or 'warning'
+                    'type' => 'error', // or 'success' or 'info' or 'warning'
                     'message' => $db->error,
-                    'title' => 'Sukses'
+                    'title' => 'Error'
                 );
             }
         }

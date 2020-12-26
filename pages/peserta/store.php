@@ -4,79 +4,63 @@ session_start();
 
 include_once("../../conf/connection.php");
 require_once("../../auth.php");
-if (isset($_POST['pelatihan'])) {
-    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
-    switch ($type) {
-        case 'create':
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-            $harga = filter_input(INPUT_POST, 'harga', FILTER_SANITIZE_STRING);
-            $harga = preg_replace('/\./', '', $harga);
+include '../../helper/GeneralHelper.php';
 
-            $sql = /** @lang sql */
-                "INSERT INTO pelatihan (name, harga) VALUE ('$name', '$harga')";
+$helper = new GeneralHelper();
+$done = $helper::ORDER_DONE;
+$cancel = $helper::ORDER_CANCEL;
 
-            if (isset($db)) {
+// Get id from URL to delete that user
+$id = $_GET['id'];
+$status = $_GET['status'];
 
-                /*
-                 * untuk transaction
-                 * $db->autocommit(false);*/
-                $query = mysqli_query($db, $sql);
-            }
-            if ($query) {
-//                $db->commit();
-//                var_export($query);die;
-                $_SESSION['toastr'] = array(
-                    'type' => 'success', // or 'success' or 'info' or 'warning'
-                    'message' => 'Data berhasil ditambah!',
-                    'title' => 'Sukses'
-                );
-                echo "<script>
-                window.location.href='../../index.php?page=workshop';
-                </script>";
-            } else {
+// Delete user row from table based on given id
+if (isset($db)) {
+    $check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM peserta WHERE id = '$id'"));
+    $userId = $check["user_id"];
+    if ($check) {
+        if ($status == "accept") {
+            $sqlPeserta = /** @lang sql */
+                "UPDATE peserta SET status='$done' WHERE id='$id'";
+            $sqlUsers = /** @lang sql */
+                "UPDATE users SET is_active=1 WHERE id='$userId'";
+            $peserta = mysqli_query($db, $sqlPeserta);
+            $user = mysqli_query($db, $sqlUsers);
+
+            if (!$user && !$peserta) {
                 $_SESSION['toastr'] = array(
                     'type' => 'warning', // or 'success' or 'info' or 'warning'
-                    'message' => 'Error: ' . $db->error,
-                    'title' => 'Peringatan'
+                    'message' => $db->error,
+                    'title' => 'Error'
                 );
-                echo "<script>
-                window.location.href='../../index.php?page=workshop';
-                </script>";
             }
-            break;
-        case 'update':
-            $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-            $harga = filter_input(INPUT_POST, 'harga', FILTER_SANITIZE_STRING);
-            $harga = preg_replace('/\./', '', $harga);
-
-            $sql = /** @lang sql */
-                "UPDATE pelatihan SET harga='$harga', name='$name' WHERE id='$id'";
-
-            if (isset($db)) {
-                $query = mysqli_query($db, $sql);
-            }
-            if ($query) {
-                $_SESSION['toastr'] = array(
-                    'type' => 'success', // or 'success' or 'info' or 'warning'
-                    'message' => 'Data berhasil diupdate!',
-                    'title' => 'Sukses'
-                );
-                echo "<script>
-                window.location.href='../../index.php?page=workshop';
-                </script>";
-            } else {
+        } else {
+            $sqlPeserta = /** @lang sql */
+                "UPDATE peserta SET status='$cancel' WHERE order_id='$id'";
+            $peserta = mysqli_query($db, $sqlPeserta);
+            if (!$peserta) {
                 $_SESSION['toastr'] = array(
                     'type' => 'warning', // or 'success' or 'info' or 'warning'
-                    'message' => 'Error: ' . $db->error,
-                    'title' => 'Peringatan'
+                    'message' => $db->error,
+                    'title' => 'Error'
                 );
-                echo "<script>
-                window.location.href='../../index.php?page=workshop';
-                </script>";
             }
-            break;
+        }
+        $_SESSION['toastr'] = array(
+            'type' => 'success', // or 'success' or 'info' or 'warning'
+            'message' => 'Data berhasil disimpan!',
+            'title' => 'Sukses'
+        );
+    } else {
+        $_SESSION['toastr'] = array(
+            'type' => 'warning', // or 'success' or 'info' or 'warning'
+            'message' => 'Data tidak ditemukan!',
+            'title' => 'Peringatan'
+        );
     }
 
-
+    echo "<script>
+         window.location.href='../../index.php?page=peserta';
+         </script>";
 }
+?>
