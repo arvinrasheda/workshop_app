@@ -12,7 +12,8 @@ if (isset($db)) {
             u.name AS fullname,
             e.name AS pelatihan,
             p.email,
-            p.status 
+            p.status,
+            p.filename 
         FROM
             peserta p
             INNER JOIN users u ON p.user_id = u.id
@@ -67,14 +68,16 @@ if (isset($db)) {
                                                 if ($row["status"] == GeneralHelper::ORDER_NEW) {
                                                     echo '<small class="badge bg-green"> NEW</small>';
                                                 } else if ($row["status"] == GeneralHelper::ORDER_ONPROGRESS) {
-                                                    echo '<small class="badge bg-warning"> ONPROGRESS</small>';
+                                                    echo '<small class="badge bg-yellow"> ONPROGRESS</small>';
                                                 } else {
                                                     echo '<small class="badge bg-blue"> DONE</small>';
                                                 }
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="index.php?page=workshop-edit&id=<?=$row['peserta_id'];?>" class="btn btn-sm btn-primary" role="button" title="Lihat Bukti transfer"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                            <?php if ($row["filename"] != null) { ?>
+                                                <a href="file/proof/<?=$row['filename'];?>" class="btn btn-sm btn-primary" role="button" title="Lihat Bukti transfer"><i class="glyphicon glyphicon-download"></i></a>
+                                            <?php } ?>
                                             <a href="index.php?page=workshop-edit&id=<?=$row['peserta_id'];?>" class="btn btn-sm btn-success" role="button" title="Approve Data"><i class="glyphicon glyphicon-check"></i></a>
                                             <a href="pages/workshop/hapus.php?id=<?=$row['peserta_id'];?>" onclick="return confirm('Anda yakin akan menolak peserta ' + '<?=$row['fullname'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Tolak Data"><i class="glyphicon glyphicon-ban-circle"></i></a>
                                         </td>

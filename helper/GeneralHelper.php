@@ -6,6 +6,7 @@ class GeneralHelper
     const ORDER_NEW = "NEW";
     const ORDER_ONPROGRESS = "ONPROGRESS";
     const ORDER_DONE = "DONE";
+    const ORDER_CANCEL = "CANCEL";
 
     public function random($lenght, $isOnlyNumber = false)
     {
@@ -20,9 +21,5 @@ class GeneralHelper
             $string .= $char{$pos};
         }
         return $string;
-    }
-
-    public function base_path($path = "") {
-        return realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR . $path;
     }
 }
