@@ -56,7 +56,11 @@ require_once("auth.php");
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>WSP</span>
+            <?php if($_SESSION["user"]["is_admin"] == 1) { ?>
+                <span class="logo-lg"><b>Admin</b>WSP</span>
+            <?php } else { ?>
+                <span class="logo-lg"><b>Member</b>WSP</span>
+            <?php } ?>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -101,56 +105,82 @@ require_once("auth.php");
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <?php if($_SESSION["user"]["is_admin"] == 1) { ?>
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p><?= $_SESSION['user']['name'] ?></p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
                 </div>
-                <div class="pull-left info">
-                    <p><?= $_SESSION['user']['name'] ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">MENU</li>
-                <li class="treeview">
-                <li <?php if (!isset($_GET['page']) == 1) echo "class='active'"; ?>><a href="index.php"><i
-                                class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a></li>
-                </li>
-                <li class="treeview <?php if(strpos($_GET['page'], 'master') !== false) echo "active";?>">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-briefcase"></i> <span>Master</span>
-                        <span class="pull-right-container">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MENU</li>
+                    <li class="treeview">
+                    <li <?php if (!isset($_GET['page']) == 1) echo "class='active'"; ?>><a href="index.php"><i
+                                    class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a></li>
+                    </li>
+                    <li class="treeview <?php if(strpos($_GET['page'], 'master') !== false) echo "active";?>">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-briefcase"></i> <span>Master</span>
+                            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li <?php if(isset($_GET['page']) && $_GET['page'] == "workshop") echo "class='active'";?>><a href="index.php?page=workshop"><i class="glyphicon glyphicon-education"></i>
-                                <span>Master Workshop</span></a></li>
-                    </ul>
-                </li>
-                <li class="treeview <?php if(strpos($_GET['page'], 'peserta') !== false) echo "active";?>">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-user"></i> <span>Peserta</span>
-                        <span class="pull-right-container">
+                        </a>
+                        <ul class="treeview-menu">
+                            <li <?php if(isset($_GET['page']) && $_GET['page'] == "workshop") echo "class='active'";?>><a href="index.php?page=workshop"><i class="glyphicon glyphicon-education"></i>
+                                    <span>Master Workshop</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview <?php if(strpos($_GET['page'], 'peserta') !== false) echo "active";?>">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-user"></i> <span>Peserta</span>
+                            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li  <?php if(isset($_GET['page']) && $_GET['page'] == "peserta") echo "class='active'";?>><a href="index.php?page=peserta"><i class="glyphicon glyphicon-user"></i> <span>Daftar Peserta</span></a></li>
-                        </li>
-                        <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
-                                <span>Link Register Peserta</span></a></li>
-                    </ul>
-                </li>
-                <li class="header">SETTING</li>
-                <li class="treeview">
-                <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=users"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
-                </li>
-            </ul>
-        </section>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li <?php if(isset($_GET['page']) && $_GET['page'] == "peserta") echo "class='active'";?>><a href="index.php?page=peserta"><i class="glyphicon glyphicon-user"></i> <span>Daftar Peserta</span></a></li>
+                            </li>
+                            <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
+                                    <span>Link Register Peserta</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="header">SETTING</li>
+                    <li class="treeview">
+                    <li  <?php if(isset($_GET['page']) && $_GET['page'] == "users") echo "class='active'";?>><a href="index.php?page=users"><i class="glyphicon glyphicon-user"></i> <span>Users</span></a></li>
+                    </li>
+                </ul>
+            </section>
+        <?php } else { ?>
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p><?= $_SESSION['user']['name'] ?></p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MENU</li>
+                    <li class="treeview">
+                    <li <?php if (!isset($_GET['page']) == 1) echo "class='active'"; ?>><a href="index.php">
+                            <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a></li>
+                    </li>
+                    <li <?php if(isset($_GET['page']) && $_GET['page'] == "pelatihan") echo "class='active'";?>><a href="index.php">
+                            <i class="glyphicon glyphicon-education"></i> <span>Pelatihan</span></a></li>
+                    </li>
+                </ul>
+            </section>
+        <?php } ?>
         <!-- /.sidebar -->
     </aside>
 
