@@ -56,7 +56,10 @@ if (isset($_GET['page'])) {
                 include 'pages/pelatihan/list.php';
                 break;
             case 'pelatihan-view':
-                include 'pages/pelatihan/view.php';
+                include 'pages/pelatihan/edit.php';
+                break;
+            case 'pelatihan-create':
+                include 'pages/pelatihan/create.php';
                 break;
             default:
                 include "pages/beranda.php";

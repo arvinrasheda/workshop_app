@@ -175,7 +175,7 @@ require_once("auth.php");
                     <li <?php if (!isset($_GET['page']) == 1) echo "class='active'"; ?>><a href="index.php">
                             <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span></a></li>
                     </li>
-                    <li <?php if(isset($_GET['page']) && $_GET['page'] == "pelatihan") echo "class='active'";?>><a href="index.php">
+                    <li <?php if(isset($_GET['page']) && $_GET['page'] == "pelatihan") echo "class='active'";?>><a href="index.php?page=pelatihan">
                             <i class="glyphicon glyphicon-education"></i> <span>Pelatihan</span></a></li>
                     </li>
                 </ul>

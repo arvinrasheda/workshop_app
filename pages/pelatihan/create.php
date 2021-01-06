@@ -2,17 +2,20 @@
 include_once("conf/connection.php");
 require_once("auth.php");
 
+if (isset($db)) {
+    $result = mysqli_query($db, "SELECT * FROM pelatihan ORDER BY id DESC");
+}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tambah Workshop
+            Tambah Pelatihan
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Tambah Workshop</li>
+            <li class="active">Tambah Pelatihan</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -25,15 +28,16 @@ require_once("auth.php");
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    <form role="form" method="post" action="pages/workshop/store.php">
+                    <form role="form" method="post" action="pages/pelatihan/store.php">
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Nama</label>
-                                <input type="text" name="name" class="form-control" placeholder="Nama" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Harga</label>
-                                <input type="text" name="harga" class="form-control number-format" placeholder="Harga" required>
+                                <label>Pelatihan</label>
+                                <select class="form-control" name="pelatihan_id" autocomplete="off" required>
+                                <option selected disabled> - Pilih Pelatihan -</option>
+                                <?php while ($row = mysqli_fetch_array($result)) { ?>
+                                    <option value="<?= $row['id'] ?>"><?= $row['name']; ?></option>
+                                <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <!-- /.box-body -->

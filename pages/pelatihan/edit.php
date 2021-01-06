@@ -33,11 +33,11 @@ if (isset($_GET['id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit Workshop
+            <?= $dataPelatihan['name'] ?>
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Edit Workshop</li>
+            <li class="active"><?= $dataPelatihan['name'] ?></li>
         </ol>
     </section>
     <!-- Main content -->
@@ -55,18 +55,16 @@ if (isset($_GET['id'])) {
                             <div class="form-group">
                                 <label>Nama</label>
                                 <input type="text" name="name" class="form-control" placeholder="Nama"
-                                       value="<?= $dataPelatihan['name'] ?>" required>
+                                       value="<?= $dataPelatihan['name'] ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label>Harga</label>
                                 <input type="text" name="harga" class="form-control number-format" placeholder="Harga"
-                                       value="<?= $dataPelatihan['harga'] ?>" required>
+                                       value="<?= $dataPelatihan['harga'] ?>" disabled>
                             </div>
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <h3 class="box-title">List Materi</h3>
-                                    <a href="index.php?page=materi-create&pelatihan_id=<?= $dataPelatihan['id'] ?>" class="btn btn-success pull-right" role="button" title="Tambah Data"><i
-                                                class="glyphicon glyphicon-plus"></i> Tambah</a>
                                 </div>
                                 <div class="box-body">
                                     <table id="workshop" class="table table-bordered table-hover table-responsive">
@@ -76,12 +74,10 @@ if (isset($_GET['id'])) {
                                             <th>Nama</th>
                                             <th>Jenis</th>
                                             <th>Link</th>
-                                            <th width="10%">Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-//                                        var_export($dataMateri);die;
                                         $no=0;
                                         if ($dataMateri) while($row = mysqli_fetch_array($dataMateri)) {
                                             ?>
@@ -95,10 +91,6 @@ if (isset($_GET['id'])) {
                                                     <?php } else if ($row['jenis'] == 'DARING') { ?>
                                                         <a href="<?= $row['link'];?>" target="_blank" class="btn btn-primary"> <i class="glyphicon glyphicon-fast-forward"> Menuju Link</i></a>
                                                     <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <a href="index.php?page=materi-edit&id=<?=$row['id'];?>" class="btn btn-sm btn-warning" role="button" title="Ubah Data"><i class="glyphicon glyphicon-edit"></i></a>
-                                                    <a href="pages/materi/hapus.php?id=<?=$row['id'];?>" onclick="return confirm('Anda yakin akan menghapus data ' + '<?=$row['nama'];?>' + ' ini ?');" class="btn btn-sm btn-danger" role="button" title="Hapus Data"><i class="glyphicon glyphicon-trash"></i></a>
                                                 </td>
                                             </tr>
 
@@ -118,11 +110,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-                            <input type="hidden" name="type" value="update">
-                            <button type="submit" name="pelatihan" class="btn btn-primary" title="Simpan Data"><i
-                                        class="glyphicon glyphicon-floppy-disk"></i> Simpan
-                            </button>
+
                         </div>
                     </form>
                 </div>
