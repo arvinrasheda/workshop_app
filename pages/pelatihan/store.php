@@ -22,9 +22,6 @@ if (isset($_POST['pelatihan'])) {
 
             if (isset($db)) {
                 $check = mysqli_query($db, "SELECT * FROM peserta WHERE user_id = '$userId' AND pelatihan_id = '$pelatihan_id'");
-                var_dump($userId);
-                var_dump($pelatihan_id);
-//                var_dump(!$check);die;
                 if (mysqli_num_rows($check) > 0) {
                     $_SESSION['toastr'] = array(
                         'type' => 'warning', // or 'success' or 'info' or 'warning'
