@@ -50,11 +50,7 @@ session_start();
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            Check Status <a href="tracking.php">Here!</a>
-                        </label>
-                    </div>
+                    <a class="btn btn-danger btn-block btn-flat" href="tracking.php">Cek Status Order</a>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">

@@ -74,11 +74,7 @@ if (isset($db)) {
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            Upload <a href="confirmation.php">Prof of payment</a>
-                        </label>
-                    </div>
+                    <a class="btn btn-danger btn-block btn-flat" href="confirmation.php">Upload Bukti Pembayaran</a>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">

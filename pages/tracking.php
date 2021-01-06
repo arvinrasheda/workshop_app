@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../conf/connection.php");
 include '../helper/GeneralHelper.php';
 $data = "";
@@ -64,25 +65,25 @@ if (isset($db)) {
 
         <form action="tracking.php" autocomplete="off" method="get">
             <div class="form-group has-feedback">
-                <input type="text" name="id" class="form-control" placeholder="Order ID / Invoice" autocomplete="off">
+                <input type="text" name="id" class="form-control" placeholder="Order ID / Invoice" autocomplete="off" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>" required>
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            Upload <a href="confirmation.php">Prof of payment</a>
-                        </label>
-                    </div>
+                    <a class="btn btn-danger btn-block btn-flat" href="confirmation.php">Upload Bukti Pembayaran</a>
                 </div>
                 <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Check</button>
+                <div class="col-xs-4"><button type="submit" class="btn btn-primary btn-block btn-flat <?php if ($data != null) {  if(isset($_GET['id']) && $_GET['id'] != '') { echo 'hidden'; } } ?>">Check</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-        <?php if ($data != "") { ?>
+        <?php if ($data != null) { ?>
+            <div style="margin-top: 10px; " class="callout callout-warning">
+                <h4>Information</h4>
+
+                <p>Harap Simpan Nomor Invoice Anda.</p>
+            </div>
             <table id="layout-skins-list" class="table table-striped bring-up nth-2-center">
                 <thead>
                 <tr>
@@ -123,7 +124,15 @@ if (isset($db)) {
                 </tr>
                 </tbody>
             </table>
-        <?php } ?>
+        <?php } else {
+            if (isset($_GET['id'])) {
+                $_SESSION['toastr'] = array(
+                    'type' => 'error', // or 'success' or 'info' or 'warning'
+                    'message' => 'Error: Data Tidak Ditemukan!',
+                    'title' => 'Peringatan'
+                );
+            }
+        };?>
     </div>
     <!-- /.form-box -->
 </div>

@@ -14,7 +14,7 @@ if (isset($_POST['users'])) {
             $password = password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
 
             $sql = /** @lang sql */
-                "INSERT INTO users (name, username, password, is_active, is_admin) VALUE ('$name', '$username', '$password', 0, 0)";
+                "INSERT INTO users (name, username, password, is_active, is_admin) VALUE ('$name', '$username', '$password', 1, 1)";
 
             if (isset($db)) {
                 $query = mysqli_query($db, $sql);

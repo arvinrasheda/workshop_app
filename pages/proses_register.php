@@ -40,6 +40,7 @@ if (isset($db)) {
                     'message' => 'Registrasi Berhasil!',
                     'title' => 'Sukses'
                 );
+                header('Location: tracking.php?id=' . $orderId);
             } else {
                 $db->rollback();
                 $_SESSION['toastr'] = array(
@@ -47,11 +48,10 @@ if (isset($db)) {
                     'message' => $db->error,
                     'title' => 'Error'
                 );
+                echo "<script>
+                window.location.href='register.php';
+                </script>";
             }
         }
     }
-
-    echo "<script>
-        window.location.href='register.php';
-        </script>";
 }
