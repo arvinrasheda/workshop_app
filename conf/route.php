@@ -1,6 +1,7 @@
 <?php
-// Halaman Routing
-// cek parameter page ada atau tidak
+/*
+ * Halaman Routing
+ */
 $id = 0;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

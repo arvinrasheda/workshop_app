@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 07:40 AM
+-- Generation Time: Jan 06, 2021 at 01:50 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -43,6 +43,8 @@ CREATE TABLE `materi` (
 INSERT INTO `materi` (`id`, `nama`, `jenis`, `link`, `description`, `pelatihan_id`) VALUES
 (1, 'nama', 'DOKUMEN', 'wallpaperflare.com_wallpaper.jpg$$', 'dwok$$', 2),
 (2, '', 'DARING', 'https://www.youtube.com/$', 'deskripsi\r\n$', 0),
+(8, 'nama aaa', 'DARING', 'https://www.youtube.com/$$$$$$$', 'aa$adwd$$', 2),
+(9, 'bbbb', 'DARING', 'https://www.youtube.com/$$', 'dwd$$', 2);
 
 -- --------------------------------------------------------
 
@@ -76,8 +78,16 @@ CREATE TABLE `peserta` (
   `email` varchar(255) DEFAULT NULL,
   `nohp` varchar(255) DEFAULT NULL,
   `order_id` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `filename` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `peserta`
+--
+
+INSERT INTO `peserta` (`id`, `user_id`, `pelatihan_id`, `email`, `nohp`, `order_id`, `status`, `filename`) VALUES
+(4, 89, 2, 'mput@email.com', '91823123', 'INV7763348', 'DONE', 'INV7763348.docx');
 
 -- --------------------------------------------------------
 
@@ -103,7 +113,8 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `is_admin`, `is_activ
 (2, 'Eka', 'eka', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 1, 1),
 (3, 'Indra', 'indra', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 1, 1),
 (4, 'Ady', 'ady', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 1, 1),
-(5, 'Wahab', 'wahab', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 1, 1);
+(5, 'Wahab', 'wahab', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 1, 1),
+(89, 'Mput', 'mput', '$2y$10$LEZFoxQ1WytyYD.Wlc/PJ.cIgFPulKDbNkyCWYJjNOv/Aj/8ei4bu', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -153,13 +164,13 @@ ALTER TABLE `pelatihan`
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
