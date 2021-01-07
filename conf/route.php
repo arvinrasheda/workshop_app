@@ -61,6 +61,9 @@ if (isset($_GET['page'])) {
             case 'pelatihan-create':
                 include 'pages/pelatihan/create.php';
                 break;
+            case 'orders':
+                include 'pages/orders/list.php';
+                break;
             default:
                 include "pages/beranda.php";
                 break;

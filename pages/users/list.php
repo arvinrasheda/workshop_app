@@ -45,7 +45,7 @@ if (isset($db)) {
                             <tbody>
                             <?php
                                 $no=0;
-                                while($row = mysqli_fetch_array($result)) {
+                                if ($result) while($row = mysqli_fetch_array($result)) {
                                     ?>
 
                                     <tr>
@@ -76,7 +76,13 @@ if (isset($db)) {
                                         </td>
                                     </tr>
 
-                                <?php } ?>
+                                <?php } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="6" align="center">Data Tidak Ditemukan</td>
+                                    </tr>
+                                    <?php
+                                }?>
                             </tbody>
                         </table>
                     </div>

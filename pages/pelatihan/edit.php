@@ -100,8 +100,7 @@ if (isset($_GET['id'])) {
                                                 <td colspan="5" align="center">Data Tidak Ditemukan</td>
                                             </tr>
                                             <?php
-                                        }
-                                            ?>
+                                        }?>
                                         </tbody>
                                     </table>
                                 </div>

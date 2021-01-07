@@ -78,6 +78,25 @@ if (isset($db)) {
                 <!-- /.col -->
             </div>
         </form>
+        <div style="margin-top: 10px; " class="box collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Transfer Manual Rekening WSP</h3>
+                <div class="box-tools pull-right">
+                    <!-- Collapse Button -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body text-center ">
+                <p style="font-size: medium;">Bank Mandiri A.N WSP <br>
+                    13234758000009</p>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <span style="color: #e25555;">&hearts;</span>
+            </div>
+        </div>
         <?php if ($data != null) { ?>
             <div style="margin-top: 10px; " class="callout callout-warning">
                 <h4>Information</h4>
@@ -160,6 +179,8 @@ if (isset($db)) {
         ?>
     });
 </script>
+<!-- AdminLTE App -->
+<script src="../dist/js/app.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     $(function () {

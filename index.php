@@ -127,9 +127,7 @@ require_once("auth.php");
                     <li class="treeview <?php if(strpos($_GET['page'], 'master') !== false) echo "active";?>">
                         <a href="#">
                             <i class="glyphicon glyphicon-briefcase"></i> <span>Master</span>
-                            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
                             <li <?php if(isset($_GET['page']) && $_GET['page'] == "workshop") echo "class='active'";?>><a href="index.php?page=workshop"><i class="glyphicon glyphicon-education"></i>
@@ -139,15 +137,12 @@ require_once("auth.php");
                     <li class="treeview <?php if(strpos($_GET['page'], 'peserta') !== false) echo "active";?>">
                         <a href="#">
                             <i class="glyphicon glyphicon-user"></i> <span>Peserta</span>
-                            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                            <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
                             <li <?php if(isset($_GET['page']) && $_GET['page'] == "peserta") echo "class='active'";?>><a href="index.php?page=peserta"><i class="glyphicon glyphicon-user"></i> <span>Daftar Peserta</span></a></li>
                             </li>
-                            <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i>
-                                    <span>Link Register Peserta</span></a></li>
+                            <li><a target="_blank" href="pages/register.php"><i class="glyphicon glyphicon-education"></i><span>Link Register Peserta</span></a></li>
                         </ul>
                     </li>
                     <li class="header">SETTING</li>
@@ -178,6 +173,12 @@ require_once("auth.php");
                     <li <?php if(isset($_GET['page']) && $_GET['page'] == "pelatihan") echo "class='active'";?>><a href="index.php?page=pelatihan">
                             <i class="glyphicon glyphicon-education"></i> <span>Pelatihan</span></a></li>
                     </li>
+
+                    <li <?php if(isset($_GET['page']) && $_GET['page'] == "orders") echo "class='active'";?>><a href="index.php?page=orders">
+                            <i class="glyphicon glyphicon-barcode"></i> <span>My Order</span></a></li>
+                    </li>
+                    <li><a target="_blank" href="pages/tracking.php"><i class="glyphicon glyphicon-transfer"></i><span>Tracking Status Order</span></a></li>
+                    <li><a target="_blank" href="pages/confirmation.php"><i class="glyphicon glyphicon-upload"></i><span>Upload Bukti Transfer</span></a></li>
                 </ul>
             </section>
         <?php } ?>

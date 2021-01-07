@@ -51,14 +51,13 @@ if (isset($db)) {
                                 <th>Nama</th>
                                 <th>Pelatihan</th>
                                 <th>Status</th>
-
                                 <th width="10%">Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
                                 $no=0;
-                                while($row = mysqli_fetch_array($result)) {
+                                if ($result) while($row = mysqli_fetch_array($result)) {
                                     ?>
 
                                     <tr>
@@ -93,7 +92,11 @@ if (isset($db)) {
                                         </td>
                                     </tr>
 
-                                <?php } ?>
+                                <?php } else { ?>
+                                <tr>
+                                    <td colspan="5" align="center">Data Tidak Ditemukan</td>
+                                </tr>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>
