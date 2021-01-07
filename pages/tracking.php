@@ -70,7 +70,11 @@ if (isset($db)) {
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <a class="btn btn-danger btn-block btn-flat" href="confirmation.php">Upload Bukti Pembayaran</a>
+                    <?php if ($data != null) { ?>
+                        <a class="btn btn-danger btn-block btn-flat" href="confirmation.php?id=<?= $orderId ?>">Upload Bukti Pembayaran</a>
+                    <?php } else { ?>
+                        <a class="btn btn-danger btn-block btn-flat" href="confirmation.php">Upload Bukti Pembayaran</a>
+                    <?php } ?>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4"><button type="submit" class="btn btn-primary btn-block btn-flat <?php if ($data != null) {  if(isset($_GET['id']) && $_GET['id'] != '') { echo 'hidden'; } } ?>">Check</button>

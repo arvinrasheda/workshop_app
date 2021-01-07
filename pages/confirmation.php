@@ -41,7 +41,7 @@ session_start();
 
         <form action="proses_confirmation.php" autocomplete="off" method="post" enctype="multipart/form-data">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Order ID / Invoice" autocomplete="off" name="order_id" required>
+                <input type="text" class="form-control" placeholder="Order ID / Invoice" autocomplete="off" name="order_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>" required>
                 <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -50,7 +50,11 @@ session_start();
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <a class="btn btn-danger btn-block btn-flat" href="tracking.php">Cek Status Order</a>
+                    <?php if (isset($_GET['id'])) { ?>
+                        <a class="btn btn-danger btn-block btn-flat" href="tracking.php?id=<?= $_GET['id'] ?>">Cek Status Order</a>
+                    <?php } else { ?>
+                        <a class="btn btn-danger btn-block btn-flat" href="tracking.php">Cek Status Order</a>
+                    <?php } ?>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">

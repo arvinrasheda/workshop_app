@@ -2,6 +2,10 @@
 // Create database connection using config file
 include_once("conf/connection.php");
 require_once("auth.php");
+include 'helper/GeneralHelper.php';
+
+$helper = new GeneralHelper();
+$done = $helper::ORDER_DONE;
 // Fetch all users data from database
 if (isset($db)) {
     $userId = $_SESSION['user']['id'];
@@ -20,7 +24,7 @@ if (isset($db)) {
             peserta p
             INNER JOIN users u ON p.user_id = u.id
             INNER JOIN pelatihan e ON p.pelatihan_id = e.id 
-        WHERE p.user_id = '$userId'
+        WHERE p.user_id = '$userId' AND p.status = '$done'
     ");
 }
 ?>
