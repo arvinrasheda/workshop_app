@@ -77,7 +77,7 @@ if (isset($db)) {
                     <?php } ?>
                 </div>
                 <!-- /.col -->
-                <div class="col-xs-4"><button type="submit" class="btn btn-primary btn-block btn-flat <?php if ($data != null) {  if(isset($_GET['id']) && $_GET['id'] != '') { echo 'hidden'; } } ?>">Check</button>
+                <div class="col-xs-4"><button type="submit" class="btn btn-primary btn-block btn-flat">Check</button>
                 </div>
                 <!-- /.col -->
             </div>
