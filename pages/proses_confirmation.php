@@ -26,9 +26,7 @@ if (isset($db)) {
                 'message' => 'Data berhasil disimpan!',
                 'title' => 'Sukses'
             );
-            echo "<script>
-            window.location.href= 'confirmation.php';
-            </script>";
+            header('Location: tracking.php?id=' . $orderId);
         } else {
             $_SESSION['toastr'] = array(
                 'type' => 'error', // or 'success' or 'info' or 'warning'

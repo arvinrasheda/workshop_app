@@ -102,10 +102,11 @@ if (isset($db)) {
             </div>
         </div>
         <?php if ($data != null) { ?>
-            <div style="margin-top: 10px; " class="callout callout-warning">
+            <div style="margin-top: 10px; " class="callout callout-primary">
                 <h4>Information</h4>
 
-                <p>Harap Simpan Nomor Invoice Anda.</p>
+                <p class="text-red">- Harap Simpan Nomor Invoice Anda.</p>
+                <p class="text-red">- Jika User Baru harap tunggu hinga status <small class="badge bg-blue"> DONE</small> agar bisa login <a class="text-blue" href="../index.php">disini</a>.</p>
             </div>
             <table id="layout-skins-list" class="table table-striped bring-up nth-2-center">
                 <thead>
