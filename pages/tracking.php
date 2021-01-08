@@ -106,7 +106,7 @@ if (isset($db)) {
                 <h4>Information</h4>
 
                 <p class="text-red">- Harap Simpan Nomor Invoice Anda.</p>
-                <p class="text-red">- Jika User Baru harap tunggu hingga status <small class="badge bg-blue"> DONE</small> agar bisa login <a class="text-blue" href="../index.php">disini</a>.</p>
+                <p class="text-red">- Jika User Baru & sudah upload bukti pembayaran harap tunggu hingga status <small class="badge bg-blue"> DONE</small> agar bisa login <a class="text-blue" href="../index.php">disini</a>.</p>
             </div>
             <table id="layout-skins-list" class="table table-striped bring-up nth-2-center">
                 <thead>
