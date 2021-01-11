@@ -36,7 +36,7 @@ if (isset($db)) {
             }
         } else {
             $sqlPeserta = /** @lang sql */
-                "UPDATE peserta SET status='$cancel' WHERE order_id='$id'";
+                "UPDATE peserta SET status='$cancel' WHERE id='$id'";
             $peserta = mysqli_query($db, $sqlPeserta);
             if (!$peserta) {
                 $_SESSION['toastr'] = array(
